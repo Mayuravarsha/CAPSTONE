@@ -1,4 +1,5 @@
 # CAPSTONE
+# Detection Of Violent Content in Videos using Audio and Video features
 
 In this project, we have proposed 2 deep-learning models for violence detection in videos. 
 “AudioProcessor” is a Computer Vision based deep learning model which classifies violent and non-violent audio using the spectrogram of the audio clips. 
