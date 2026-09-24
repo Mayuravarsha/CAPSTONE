@@ -17,7 +17,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads/'
 
 app = Flask(__name__)
-app.secret_key = "secret key"
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", os.urandom(24))
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
