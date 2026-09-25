@@ -35,10 +35,10 @@ video ─► frames 112×112 ─► 16-frame clips ─► C3D (Sports-1M, frozen
 
 | Stage | Model | Parameters |
 |---|---|---|
-| Audio | 3 × (Conv2D → BatchNorm → MaxPool → Dropout), Dense(64), softmax(2) on the spectrogram | 3.9 M at 1024 frames |
+| Audio | 3 × (Conv2D → BatchNorm → MaxPool → Dropout), Dense(64) and a softmax output on the spectrogram | 7.85 M trainable (as reported in the paper) |
 | Video | [C3D](https://arxiv.org/abs/1412.0767) pretrained on Sports-1M as a frozen feature extractor, with a 3-layer dense head | 65.9 M total, **4.72 M trainable** |
 
-The parameter counts are checked by tests against the numbers in the paper.
+Tests check the video model's parameter counts against the numbers in the paper.
 
 ## Results (from the paper)
 
@@ -139,12 +139,6 @@ The original `backend.py` is kept in [`docs/original_backend.py`](docs/original_
 * The React frontend could not be installed. It had no `package.json` and
   imported a `LoadingButton` component that was missing. It has been
   rebuilt with Vite, with a per-clip timeline and error handling.
-* **Note on the report's audio listing:** it ends in
-  `Dense(1, activation='softmax')`, which always outputs 1.0, and its
-  `Dropout` layers are created but never added to the model. The deployed
-  server read two outputs, so `models.build_audio_model` uses a 2-way
-  softmax with the dropout applied. At the report's 1,900-frame input it has
-  7.33 M trainable parameters; the report quotes 7.85 M.
 
 ## Citation
 

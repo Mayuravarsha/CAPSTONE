@@ -3,12 +3,9 @@
 TensorFlow is imported lazily so the rest of the package (and its tests)
 work without it.
 
-* Audio CNN: three Conv2D/BatchNorm/MaxPool blocks on the spectrogram, then
-  Dense(64) and a 2-way softmax (non-violent, violent). The report's listing
-  ends in Dense(1, softmax), which always outputs 1.0, and never adds its
-  Dropout layers to the model. The deployed server read two outputs, so this
-  definition follows the deployed model: Dense(2, softmax), with the dropout
-  actually applied.
+* Audio CNN: three Conv2D/BatchNorm/MaxPool/Dropout blocks on the
+  spectrogram, then Dense(64) and a softmax over (non-violent, violent),
+  matching the output format the deployed server reads.
 * Video model: C3D pretrained on Sports-1M, frozen up to fc6 (4096-d
   features), followed by Dropout -> Dense(1024) -> Dropout -> Dense(512) ->
   Dropout -> Dense(1, sigmoid). Only the head (4.72M parameters) is trained.
