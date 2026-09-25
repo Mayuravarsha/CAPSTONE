@@ -1,0 +1,7 @@
+# serving and preprocessing
+flask>=2.3
+numpy>=1.24
+scipy>=1.10
+opencv-python-headless>=4.8
+# model inference (the trained .h5 files were saved with TF 2.x / Keras 2)
+tensorflow>=2.12,<2.16
